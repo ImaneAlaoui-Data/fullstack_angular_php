@@ -1,0 +1,32 @@
+<form [formGroup]="internForm" (ngSubmit)="onSubmit()">
+    <legend>Ajouter un stagiaire</legend>
+    <fieldset>
+        <div class="form-field">
+            <input type="text" formControlName="lastname" placeholder="Votre nom...">
+            <div class="error"  *ngIf="internForm.controls['lastname'].errors && internForm.controls['lastname'].touched">
+                <span *ngIf="internForm.controls['lastname'].hasError('required')">
+                    Le nom ne peut pas être vide
+                </span>
+                <span *ngIf="internForm.controls['lastname'].hasError('minlength')">
+                    Le nombre de caractères est insuffisant pour le nom
+                </span>
+            </div>
+        </div>
+        <div class="form-field">
+            <input type="text" formControlName="firstname" placeholder="Votre prénom...">
+            <div class="error" *ngIf="internForm.controls['firstname'].hasError('required') && internForm.controls['firstname'].touched">
+                Le prénom ne peut pas être vide
+            </div>
+        </div>
+        <div class="form-field">
+            <select formControlName="poe">
+                
+            </select>
+        </div> 
+    </fieldset>
+    <div class="form-field">
+        <button [disabled]="internForm.invalid" type="submit">Ajouter</button>
+    </div>
+</form>
+
+{{ internForm.value | json }}

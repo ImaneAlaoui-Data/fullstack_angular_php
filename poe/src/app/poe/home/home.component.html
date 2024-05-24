@@ -1,0 +1,11 @@
+<h1>POE List</h1>
+
+<ul>
+    <li *ngFor="let poe of poes">
+        <span>{{ poe.name | uppercase }} {{ poe.duration }}h</span>
+    </li>
+</ul>
+
+<button type="button" [routerLink]="['/poe-add']">
+    Add a POE
+</button>

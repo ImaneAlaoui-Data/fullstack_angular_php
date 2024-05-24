@@ -1,0 +1,5 @@
+# SQL Datas
+docker/datas
+
+# Environment vars
+.env

@@ -1,0 +1,23 @@
+<h1>Emargements</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let intern of interns">
+            <td>&nbsp;</td>
+            <td>{{ intern.firstname }}</td>
+            <td>{{ intern.lastname  | uppercase }}</td>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<a [routerLink]="['/intern-add']">
+    Ajouter un stagiaire
+</a>

@@ -1,0 +1,41 @@
+{
+  "interns": [
+    {
+      "lastname": "Aubert",
+      "firstname": "Jean-Luc",
+      "id": "f223"
+    },
+    {
+      "lastname": "Bond",
+      "firstname": "James",
+      "id": "29d5"
+    },
+    {
+      "id": "00c7",
+      "lastname": "Bonissel de la Batte",
+      "firstname": "Hubert"
+    },
+    {
+      "id": "b9b2",
+      "lastname": "Sinclair",
+      "firstname": "Bret"
+    },
+    {
+      "id": "268f",
+      "lastname": "Lecter",
+      "firstname": "Hanibal"
+    }
+  ],
+  "poes": [
+    {
+      "id": "d90f",
+      "name": "Dev Cyber",
+      "duration": 399
+    },
+    {
+      "id": "28cc",
+      "name": "SAP - ABAP",
+      "duration": 399
+    }
+  ]
+}

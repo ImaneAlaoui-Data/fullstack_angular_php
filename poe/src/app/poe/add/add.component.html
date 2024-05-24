@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+        <input type="text" formControlName="name">
+        <div class="error" *ngIf="c['name'].errors && c['name'].touched">
+            Name cannot be empty
+        </div>
+    </div>
+
+    <div>
+        <input type="number" formControlName="duration">
+        <div class="error" *ngIf="c['duration'].errors && c['duration'].touched">
+            <span *ngIf="c['duration'].hasError('required')">
+                Duration cannot be empty
+            </span>
+            <span *ngIf="c['duration'].hasError('min')">
+                Duration cannot be null or less than 1
+            </span>
+        </div>
+    </div>
+    <div>
+        <button>
+            Add
+        </button>
+    </div>
+</form>
