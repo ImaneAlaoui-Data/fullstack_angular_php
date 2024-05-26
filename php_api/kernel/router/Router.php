@@ -9,7 +9,7 @@
  */
 namespace Aelion\Router;
 
-class Router extends AltoRouter {
+class Router extends \AltoRouter {
     public function __construct() {
         parent::__construct();
         $this->setMapping();
@@ -19,7 +19,7 @@ class Router extends AltoRouter {
         $this->map(
             'GET',
             '/',
-            'Aelion\Home\Home#hello'
+            'Api\Home\Home#hello'
         );
     }
 }
