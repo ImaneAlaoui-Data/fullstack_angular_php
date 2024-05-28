@@ -5,6 +5,8 @@
  * @version 1.0.0
  *  - Simple route collection
  */
+require_once(__DIR__ . '/../http/request/Request.php');
+require_once(__DIR__ . '/../core/controller/Controller.php');
 class Router {
     private array $uris = [
         '/' => ['GET' => 'home page'],
@@ -12,22 +14,24 @@ class Router {
         '/contact' => ['GET' => 'page contact', 'POST' => 'Send email']
     ];
 
-    private string $uri;
-    private string $method;
+    private Request $request;
 
-    public function __construct(string $uri, string $method) {
-        $this->uri = $uri;
-        $this->method = $method;
+    // DI : Dependency Injection
+    public function __construct(Request $request) {
+        $this->request = $request;
     }
 
-    public function route(): string {
-        if (array_key_exists($this->uri, $this->uris) && array_key_exists($this->method, $this->uris[$this->uri])) {
-            return 'Uri : ' . $this->uri . ' with ' . $this->method . ' method says ' . $this->uris[$this->uri][$this->method];
-        } else {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-            return 'La ressource : ' . $this->uri . ' n\'est pas autorisée';
+    public function route(): Controller {
+        if (array_key_exists($this->request->getUri(), $this->uris) && array_key_exists($this->request->getMethod(), $this->uris[$this->request->getUri()])) {
+            $controllerName = ucfirst(strtolower($this->request->getMethod()));
+            $controllerName = $controllerName . substr($this->request->getUri(), 1);
+            $className = $controllerName; // Store only class name
+            $controllerName = $controllerName . '.php';
+            $controllerName = __DIR__ . '/..' . $this->request->getUri() . '/' . $controllerName;
+            require_once($controllerName);
+            return new $className($this->request);
         }
+        throw new \Exception($this->request->getServerProtocol() . ' 400 Bad request');
     }
-
 
 }

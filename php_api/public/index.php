@@ -9,19 +9,19 @@ require_once('./../vendor/autoload.php');
 
 use Aelion\Kernel;
 
-ini_set('error_reporting', true);
-error_reporting(E_ALL & ~E_NOTICE);
-
 $kernel = Kernel::create();
 $response = $kernel->processRequest();
 echo $response->send();
 */
-$uri = $_SERVER['REQUEST_URI'];
-$method = $_SERVER['REQUEST_METHOD'];
+
 
 require_once('./../src/router/Router.php');
-$router = new Router($uri, $method);
-$response = $router->route();
-echo $response;
+require_once('./../src/http/request/Request.php');
+
+$request = new Request();
+$request->processRequest();
+$router = new Router($request);
+$controller = $router->route();
+echo $controller->processRequest();
 
 
