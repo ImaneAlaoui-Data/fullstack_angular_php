@@ -16,4 +16,12 @@ $kernel = Kernel::create();
 $response = $kernel->processRequest();
 echo $response->send();
 */
-echo 'Hello PHP';
+$uri = $_SERVER['REQUEST_URI'];
+$method = $_SERVER['REQUEST_METHOD'];
+
+require_once('./../src/router/Router.php');
+$router = new Router($uri, $method);
+$response = $router->route();
+echo $response;
+
+
