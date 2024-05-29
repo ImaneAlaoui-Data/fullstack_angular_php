@@ -15,6 +15,8 @@ final class Request {
         $this->uri = $_SERVER['REQUEST_URI'];
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->serverProtocol = $_SERVER['SERVER_PROTOCOL'];
+        header('Access-Control-Allow-Origin: http://localhost:8080');
+        // header('Access-Control-Allow-Origin: *');
     }
 
     public function getUri(): string {
