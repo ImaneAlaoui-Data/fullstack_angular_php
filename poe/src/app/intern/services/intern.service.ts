@@ -32,7 +32,7 @@ export class InternService implements IService<Intern> {
 
   findAll(): Observable<Intern[]> {
     return this._httpClient.get<Intern[]>(
-      'http://localhost:3000/interns'
+      'http://localhost:8003/interns'
     )
   }
 
