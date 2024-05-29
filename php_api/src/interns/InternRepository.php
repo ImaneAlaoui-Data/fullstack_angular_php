@@ -43,5 +43,21 @@ class InternRepository {
         $intern->setGender(1);
 
         array_push($this->interns, $intern);
+
+        $intern = new Intern();
+        $intern->setId(2);
+        $intern->setLastname('Lecomte');
+        $intern->setFirstname('Valérie');
+        $intern->setGender(0);
+
+        array_push($this->interns, $intern);
+
+        $intern = new Intern();
+        $intern->setId(3);
+        $intern->setLastname('Chenu');
+        $intern->setFirstname('Guillaume');
+        $intern->setGender(1);
+
+        array_push($this->interns, $intern);
     }
 }
