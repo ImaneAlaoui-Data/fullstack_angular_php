@@ -1,12 +1,29 @@
 <?php
+require_once(__DIR__ . '/../db/DbConnect.php');
 class InternRepository {
     private array $interns = [];
+    private \PDO $connection;
 
     public function __construct() {
-        $this->loadIntern();
+        $connection = new DbConnect();
+        $connection->connect();
+        $this->connection = $connection->getConnection();
     }
 
     public function findAll(): array {
+        // 1) Sets the SQL query
+        $sqlQuery = 'SELECT id, lastname, firstname, gender FROM intern;';
+        $pdoStatement = $this->connection->query($sqlQuery);
+        if ($pdoStatement !== false) {
+            while($row = $pdoStatement->fetch(PDO::FETCH_OBJ)) {
+                $intern = new Intern(); // Model
+                $intern->setId($row->id);
+                $intern->setLastname($row->lastname);
+                $intern->setFirstname($row->firstname);
+                $intern->setGender($row->gender);
+                array_push($this->interns, $intern);
+            }
+        }
         return $this->interns;
     }
 
@@ -16,19 +33,29 @@ class InternRepository {
      * @throws Exception if not found
      */
     public function findOne(int $id): ?Intern {
-        $theIntern = null;
-        foreach($this->interns as $intern) {
-            if ($intern->getId() === $id) {
-                $theIntern = $intern;
-                break;
-            }
-        }
+        //1. Définir la requête pour récupérer 1 Intern
+        // à partir de son id
+        $sqlQuery = 'SELECT id, lastname, firstname, gender FROM intern WHERE id=' . $id;
 
-        if (!is_null($theIntern)) {
-            return $theIntern;
-        }
+        // 2. Exécuter la requête
+        $pdoStatement = $this->connection->query($sqlQuery);
 
-        throw new \Exception('Intern with id : ' . $id . ' was not found');
+        // 3. Si la requête retourne 1 élément
+        // créer l'instance de la classe Intern correspondante
+        // et la retourner
+        if ($pdoStatement !== false) {
+            $row = $pdoStatement->fetch(PDO::FETCH_OBJ);
+            $intern = new Intern(); // Model
+            $intern->setId($row->id);
+            $intern->setLastname($row->lastname);
+            $intern->setFirstname($row->firstname);
+            $intern->setGender($row->gender);
+
+            return $intern;
+        }
+        // 3.1 Si la requête ne retourne aucune ligne
+        // Lever une exception
+        throw new \Exception('No intern were found with ' . $id . ' ID');
     }
 
     public function add(Intern $intern): Intern {

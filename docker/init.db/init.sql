@@ -27,5 +27,7 @@ INSERT INTO intern (lastname, firstname, gender, poe_id) VALUES
     ('Bernardin', 'Bruno', 1, 1);
 
 CREATE USER 'poe_db_admin'@localhost IDENTIFIED BY 'poe_secret_password';
+
 GRANT ALL PRIVILEGES ON `poe_repository`.* TO 'poe_db_admin'@'localhost';
+
 FLUSH PRIVILEGES;

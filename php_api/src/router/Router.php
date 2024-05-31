@@ -11,7 +11,8 @@ class Router {
     private array $uris = [
         '/' => ['GET' => 'home page'],
         '/interns' => ['GET' => 'interns list', 'POST' => 'Add an intern'],
-        '/contact' => ['GET' => 'page contact', 'POST' => 'Send email']
+        '/contact' => ['GET' => 'page contact', 'POST' => 'Send email'],
+        '/oneintern' => ['GET' => 'Un interne']
     ];
 
     private Request $request;

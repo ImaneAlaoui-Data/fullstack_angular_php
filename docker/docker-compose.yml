@@ -6,18 +6,18 @@ services:
         restart: unless-stopped
         env_file: .env
         ports: 
-            - 3307:3307
+            - 3306:3306
         volumes: 
             - ./datas:/var/lib/mysql
             - ./init.db/init.sql:/docker-entrypoint-initdb.d/init.sql
-        command: '--default-authentication-plugin=mysql_native_password'
+        #command: '--default-authentication-plugin=mysql_native_password'
         networks:
             - poe
     api: 
         image: webdevops/php-apache:8.2
         container_name: api_poe
         depends_on: 
-            - "db"
+            - db
         volumes: 
             - ./../php_api:/var/www/vhosts/api/htdocs
             - ./etc/apache2/api/sites-enabled:/etc/apache2/sites-enabled
@@ -41,4 +41,5 @@ services:
             - poe
 networks: 
     poe: 
+        driver: bridge
         external: false
