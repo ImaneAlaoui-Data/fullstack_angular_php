@@ -18,6 +18,7 @@ echo $response->send();
 require_once('./../src/router/Router.php');
 require_once('./../src/http/request/Request.php');
 
+
 $request = new Request();
 $request->processRequest();
 $router = new Router($request);

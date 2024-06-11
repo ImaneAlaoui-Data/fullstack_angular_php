@@ -21,13 +21,8 @@ final class GetInterns implements Controller {
      * @override
      * @see Core/Controller/Controller
      */
-<<<<<<< HEAD
     public function processRequest(): string {
         header('Content-Type: application/json');
         return json_encode($this->service->findAll());
-=======
-    public function processRequest() {
-        return 'List of Interns';
->>>>>>> 6dc0b46 (Routing, controller, service, repository)
     }
 }

@@ -24,16 +24,20 @@ class InternServiceImpl implements InternService {
         return $deserializedResults;
     }
 
-    public function findOne(int $id): Intern {
-        try {
-            return $this->repository->findOne($id);
-        } catch (\Exception $e) {
-            throw $e;
-        }
+    public function findOne(int $id): array {
+            $result = $this->repository->findOne($id);
+            $deserializedIntern = [
+                'id' => $result->getId(),
+                'lastname' => $result->getLastname(),
+                'firstname' => $result->getFirstname(),
+                'gender' => $result->getGender()
+            ];
+            return $deserializedIntern;
+
         
     }
 
-    public function add(Intern $intern): Intern {
-        return new Intern();
+    public function add(Intern $intern): array {
+        return [new Intern()];
     }
 }
